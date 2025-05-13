@@ -10,22 +10,25 @@ pipeline {
 
     stage('Build Docker Image') {
       steps {
-        script {
-          sh 'docker build -t inventory-backend ./backend'
-        }
+        sh 'docker build -t inventory-backend ./backend'
+      }
+    }
+
+    stage('Install Dependencies') {
+      steps {
+        sh 'cd backend && npm install'
       }
     }
 
     stage('Run Tests') {
       steps {
-        echo 'Placeholder for test script...'
-        // sh 'npm test' – if you add tests later
+        sh 'cd backend && npm test'
       }
     }
 
     stage('Done') {
       steps {
-        echo 'Build complete!'
+        echo 'Build and test successful!'
       }
     }
   }
