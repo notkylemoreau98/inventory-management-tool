@@ -1,0 +1,20 @@
+# Node modules
+node_modules/
+**/node_modules/
+
+# Logs
+logs
+*.log
+
+# Environment
+.env
+
+# DB data
+db_data/
+
+# Docker
+*.pid
+*.sock
+
+# Mac stuff
+.DS_Store
