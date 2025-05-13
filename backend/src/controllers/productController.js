@@ -8,7 +8,23 @@ exports.getAll = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  const { name, price, categoryId } = req.body;
-  const product = await Product.create({ name, price, CategoryId: categoryId });
-  res.status(201).json(product);
+  try {
+    const { name, description, price, categoryId } = req.body;
+
+    // Handle optional image
+    const imageUrl = req.file ? req.file.location : null;
+
+    const newProduct = await Product.create({
+      name,
+      description,
+      price,
+      categoryId,
+      imageUrl,
+    });
+
+    res.status(201).json(newProduct);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to create product' });
+  }
 };
